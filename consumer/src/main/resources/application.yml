@@ -8,9 +8,15 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-  instance:
-    preferIpAddress: true
+# reactive feign 配置
+reactive:
+  feign:
+    client:
+      config:
+        producer:
+          retry:
+            args:
+              backoffInMs: 10
+              maxRetries: 2
+            builder: reactivefeign.ReactiveOptions.Builder
+
